@@ -1,0 +1,109 @@
+/* 
+ * Global styles for BudgetPilot
+ * This file imports Tailwind's base, components, and utilities
+ * We also add custom CSS variables and base styles for the liquid glass UI
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+ * Base layer: Set up the root element and custom properties
+ * These variables can be used throughout the app for consistent theming
+ */
+@layer base {
+  :root {
+    /* Neutral color palette for liquid glass aesthetic */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+  }
+
+  /* 
+   * Smooth scrolling and better font rendering
+   * This makes the UI feel more polished
+   */
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-app-gradient text-gray-900;
+    /* Apple-style soft gradient background */
+  }
+}
+
+/* 
+ * Component layer: Reusable utility classes for liquid glass effects
+ * These can be applied to any element using className
+ */
+@layer components {
+  /* 
+   * Glass panel: Large containers with radial gradient + backdrop blur
+   * Use for main content areas and large dashboard sections
+   */
+  .glass-panel {
+    @apply backdrop-blur-2xl bg-white/10 border border-white/20 rounded-3xl shadow-soft-lg;
+    /* 
+     * backdrop-blur-2xl: Strong frosted glass blur effect
+     * bg-white/10: Subtle transparent white background (10% opacity)
+     * border-white/20: Subtle white border for definition
+     * rounded-3xl: Large rounded corners for modern look
+     * shadow-soft-lg: Soft shadow for floating effect
+     */
+  }
+
+  /* 
+   * Glass card: Smaller glassy containers for stats/widgets
+   * Use for cards, widgets, and smaller content blocks
+   */
+  .glass-card {
+    @apply backdrop-blur-xl bg-white/15 border border-white/20 rounded-2xl shadow-soft;
+    /* 
+     * backdrop-blur-xl: Frosted glass blur effect
+     * bg-white/15: Slightly lighter blur than panel
+     * border-white/20: Subtle white border
+     * rounded-2xl: Medium rounded corners
+     * shadow-soft: Soft shadow for depth
+     */
+  }
+
+  /* 
+   * Glass nav: Navbar-specific blur styling
+   * Use for navigation bars and top-level navigation
+   */
+  .glass-nav {
+    @apply backdrop-blur-xl bg-white/10 border border-white/20;
+    /* 
+     * backdrop-blur-xl: Frosted glass blur effect
+     * bg-white/10: Transparent white background
+     * border-white/20: Subtle white border
+     */
+  }
+
+  /* 
+   * Glass container: Legacy class for backward compatibility
+   * Creates a frosted glass effect with blur and transparency
+   */
+  .glass-container {
+    @apply backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl shadow-lg;
+    /* 
+     * backdrop-blur-xl: Creates the frosted glass blur effect
+     * bg-white/30: Semi-transparent white background (30% opacity)
+     * border-white/20: Subtle white border for definition
+     * rounded-2xl: Large rounded corners for modern look
+     * shadow-lg: Soft shadow for depth
+     */
+  }
+}
+
+/* 
+ * Utility layer: Custom utilities if needed
+ * Add any project-specific utility classes here
+ */
+@layer utilities {
+  /* Add custom utilities here if needed in the future */
+}
+

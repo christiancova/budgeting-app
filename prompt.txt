@@ -1,0 +1,121 @@
+You are helping me build a personal finance / budgeting web app (like Copilot) called "BudgetPilot".
+
+Your role:
+Act as a senior full stack engineer mentoring a junior dev. I can code a bit, but I have almost no experience structuring full projects. 
+You must keep the code clean and understandable, and explain what you are doing in simple terms through comments and short notes 
+in the files you create.
+
+=== PROJECT GOAL (FOR NOW: STEP 1 ONLY) ===
+Right now we are ONLY doing Step 1: bootstrap the project.
+
+Do NOT implement auth, database, Plaid, or Teller yet. Just set up a solid, modern base project that is ready for those features later.
+
+The goal of Step 1 is:
+1. Create a modern Next.js app (App Router) with TypeScript.
+2. Configure Tailwind CSS for styling.
+3. Set up a simple, clean layout and page structure for a future dashboard.
+4. Add basic components and placeholder pages for:
+   - Landing page
+   - Dashboard shell
+   - Navigation sidebar or top nav
+5. Add clear comments so I can understand how the project is structured.
+
+=== TECH STACK REQUIREMENTS ===
+Use the following choices:
+
+- Framework: Next.js 14 (App Router) with TypeScript
+- Styling: Tailwind CSS
+- Package manager: npm or pnpm (pick one and be consistent)
+- Code style: idiomatic React with functional components and hooks
+- File-based routing: Next.js "app" directory
+
+Later we will add:
+- Auth: Auth.js (NextAuth) with credentials (email + password)
+- Database: PostgreSQL via Prisma (likely Supabase or Neon)
+- Bank data: Plaid or Teller sandbox
+For now, just prepare the structure where these things will fit.
+
+=== WHAT TO CREATE IN STEP 1 ===
+
+1. PROJECT SCAFFOLD
+   - Initialize a new Next.js project with TypeScript and the App Router.
+   - Integrate Tailwind CSS.
+   - Make sure the default layout and globals are wired correctly.
+
+2. FILE STRUCTURE
+   Use an "app" directory with something like:
+
+   - app/
+     - layout.tsx
+     - page.tsx                (landing page)
+     - dashboard/
+       - page.tsx              (main dashboard shell)
+   - components/
+     - Navbar.tsx
+     - Sidebar.tsx
+     - DashboardShell.tsx
+   - styles/
+     - globals.css             (if not already created by Next)
+   - lib/
+     - (empty or placeholder for now, we will use this later)
+
+   This is a suggestion. If you adjust the structure, keep it simple and explain why in comments or a short note.
+
+3. LANDING PAGE
+   - A simple marketing-style page at "/" that:
+     - Explains that BudgetPilot is a personal finance and budgeting app.
+     - Has a main call to action button (for now it can just link to "/dashboard").
+   - Use Tailwind to make it look clean and modern but do not overcomplicate the design.
+
+4. DASHBOARD SHELL
+   - Create a protected-feeling dashboard layout at "/dashboard" (even though auth is not implemented yet).
+   - Include:
+     - A top navbar or sidebar with:
+       - App name ("BudgetPilot")
+       - Placeholder links for "Overview", "Transactions", "Budgets", "Settings"
+     - A main content area that shows:
+       - A simple welcome message
+       - A brief note like "Future: this page will show your spending overview, budgets, and bank accounts"
+   - Use reusable components where it makes sense, such as:
+     - <Navbar />
+     - <Sidebar />
+     - <DashboardShell />
+
+5. DEV EXPERIENCE
+   - Ensure the code is organized and readable for a beginner.
+   - Add comments in the key files explaining:
+     - What the file is responsible for
+     - How the layout and routing work
+   - If you add any scripts or commands (like `dev`, `build`), make sure package.json is correct.
+
+6. Apply a **starter visual style inspired by Apple's new "liquid glass" UI**:
+   - Soft, frosted effects
+   - Subtle gradients
+   - Blurred glass containers
+   - Rounded corners and layered depth
+   - Smooth animations and opacity transitions
+   - Minimal color, mostly neutrals with subtle tints
+
+This does NOT need to be perfect yet — just a **stylistic direction**. Use Tailwind to configure reusable utility classes and base styles.
+
+=== STYLE AND COMMENTING GUIDELINES ===
+
+- Use TypeScript everywhere.
+- Keep components small and focused.
+- Use clear names like `DashboardShell`, `Sidebar`, `Navbar`.
+- Add short comments at the top of important files explaining their purpose.
+- Add a small `README` section in the main README file that explains:
+  - How to run the project locally
+  - What pages currently exist
+  - That this is Step 1 of a multi-step project (auth, DB, Plaid will come later)
+
+=== HOW TO INTERACT WITH ME ===
+
+When I ask you to "update something for Step 1" you should:
+- Edit or create the relevant files.
+- Explain briefly (in a comment or a short note) what changed and why.
+
+When we are done with Step 1 I will explicitly tell you we are moving to Step 2 (auth and database). Until then, do not add any authentication, database code, or bank API integration. Focus on a clean scaffold.
+
+Now, in this repo, set up everything described above for Step 1.
+Start by assuming this is a fresh project and show me the files you create or modify along the way.

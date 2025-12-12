@@ -1,0 +1,10 @@
+# This directory will be used for utility functions, helpers, and shared logic
+# Examples of what will go here later:
+# - Database connection utilities (Prisma client)
+# - API helpers
+# - Form validation functions
+# - Date/currency formatting utilities
+# - Auth helpers
+
+
+
