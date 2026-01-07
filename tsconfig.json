@@ -20,6 +20,8 @@
         "name": "next"
       }
     ],
+    // Base URL for module resolution
+    "baseUrl": ".",
     // Path aliases - allows us to import with @/ instead of relative paths
     "paths": {
       "@/*": ["./*"]
