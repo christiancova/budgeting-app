@@ -61,7 +61,7 @@ export default function Sidebar() {
       {/* Bottom section - placeholder for future user info */}
       <div className="mt-8 pt-8 border-t border-white/20">
         <p className="text-xs text-gray-500 text-center">
-          BudgetPilot v1.0
+          BudgetFLow v1.0
         </p>
       </div>
     </aside>

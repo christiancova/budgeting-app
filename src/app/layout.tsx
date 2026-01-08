@@ -25,8 +25,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 // Metadata for the app (shown in browser tab, SEO, etc.)
 export const metadata: Metadata = {
-  title: "BudgetPilot - Personal Finance & Budgeting",
-  description: "Take control of your finances with BudgetPilot. Track spending, manage budgets, and achieve your financial goals.",
+  title: "BudgetFLow - Personal Finance & Budgeting",
+  description: "Take control of your finances with BudgetFLow. Track spending, manage budgets, and achieve your financial goals.",
 };
 
 export default function RootLayout({

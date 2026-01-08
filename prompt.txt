@@ -1,4 +1,4 @@
-You are helping me build a personal finance / budgeting web app (like Copilot) called "BudgetPilot".
+You are helping me build a personal finance / budgeting web app (like Copilot) called "BudgetFLow".
 
 Your role:
 Act as a senior full stack engineer mentoring a junior dev. I can code a bit, but I have almost no experience structuring full projects. 
@@ -62,8 +62,8 @@ For now, just prepare the structure where these things will fit.
    This is a suggestion. If you adjust the structure, keep it simple and explain why in comments or a short note.
 
 3. LANDING PAGE
-   - A simple marketing-style page at "/" that:
-     - Explains that BudgetPilot is a personal finance and budgeting app.
+  - A simple marketing-style page at "/" that:
+    - Explains that BudgetFLow is a personal finance and budgeting app.
      - Has a main call to action button (for now it can just link to "/dashboard").
    - Use Tailwind to make it look clean and modern but do not overcomplicate the design.
 
@@ -71,7 +71,7 @@ For now, just prepare the structure where these things will fit.
    - Create a protected-feeling dashboard layout at "/dashboard" (even though auth is not implemented yet).
    - Include:
      - A top navbar or sidebar with:
-       - App name ("BudgetPilot")
+      - App name ("BudgetFLow")
        - Placeholder links for "Overview", "Transactions", "Budgets", "Settings"
      - A main content area that shows:
        - A simple welcome message

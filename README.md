@@ -1,110 +1,316 @@
-# BudgetPilot
+# BudgetFlow
 
-A modern personal finance and budgeting web application built with Next.js.
+A modern personal finance management application built with Next.js, TypeScript, and Supabase. Track expenses, manage budgets, and gain intelligent insights into your spending habits with a beautiful, minimalist interface.
 
-## 🎯 Project Status
+![Status](https://img.shields.io/badge/status-in%20development-yellow)
+![Next.js](https://img.shields.io/badge/Next.js-15-black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-**Current Phase: Step 1 - Project Bootstrap**
+## ✨ Features
 
-This is the initial setup phase of BudgetPilot. We've created a solid foundation with:
-- Next.js 14 with App Router and TypeScript
-- Tailwind CSS for styling
-- Liquid glass UI design aesthetic
-- Basic page structure and navigation
+### ✅ Phase 1: Authentication & Foundation (Complete)
 
-**Not yet implemented (coming in future steps):**
-- Authentication (Auth.js/NextAuth)
-- Database (PostgreSQL via Prisma)
-- Bank integrations (Plaid or Teller)
-- Real financial data and transactions
+- 🔐 **Secure Authentication**
+  - Email/password signup and login
+  - Password recovery via email
+  - JWT-based session management
+  - Protected routes with middleware
+  - Row-level security in database
+
+- 👤 **User Management**
+  - User profiles with Supabase
+  - Automatic profile creation on signup
+  - Personalized dashboard
+
+- 🎨 **Modern UI/UX**
+  - Minimalist black & white design
+  - Dark mode support
+  - Fully responsive (mobile, tablet, desktop)
+  - Clean, accessible interface
+  - Smooth animations and transitions
+
+### 🚧 Coming Soon
+
+- 📊 **Transaction Management** (Phase 1.5)
+  - Manual transaction entry
+  - Category management
+  - Transaction filtering and search
+  - Edit and delete transactions
+
+- 📁 **Bank Statement Upload** (Phase 2)
+  - CSV, Excel, and PDF support
+  - Automatic transaction parsing
+  - Smart categorization with AI
+  - Duplicate detection
+
+- 💰 **Budget Tracking** (Phase 2)
+  - Create monthly budgets by category
+  - Real-time spending tracking
+  - Budget alerts and warnings
+  - Progress visualization
+
+- 🤖 **AI-Powered Insights** (Phase 3)
+  - Natural language query chatbot
+  - Spending pattern analysis
+  - Budget recommendations
+  - Savings opportunities
+
+- 📈 **Reports & Analytics** (Phase 4)
+  - Monthly/yearly reports
+  - Category breakdowns
+  - Trend analysis
+  - Export functionality (PDF, CSV)
+
+## 🛠️ Tech Stack
+
+### Frontend
+- **Framework:** [Next.js 15](https://nextjs.org/) (App Router)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **UI Components:** [shadcn/ui](https://ui.shadcn.com/) + [Radix UI](https://www.radix-ui.com/)
+- **Icons:** [Lucide React](https://lucide.dev/)
+
+### Backend
+- **Database:** [PostgreSQL](https://www.postgresql.org/) via [Supabase](https://supabase.com/)
+- **Authentication:** [Supabase Auth](https://supabase.com/auth)
+- **ORM:** Supabase Client
+- **File Parsing:** pdf-parse, xlsx, papaparse (planned)
+
+### AI Integration (Planned)
+- **LLM:** [Anthropic Claude](https://www.anthropic.com/claude) API
+
+### Deployment
+- **Hosting:** [Vercel](https://vercel.com/)
+- **Database:** Supabase Cloud
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-Make sure you have Node.js installed (version 18 or higher recommended).
+- Node.js 18+ installed
+- npm or pnpm package manager
+- Supabase account (free tier works great)
 
 ### Installation
 
-1. Install dependencies:
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/budget-tracker.git
+   cd budget-tracker
+   ```
+
+2. **Install dependencies**
    ```bash
    npm install
    # or
    pnpm install
    ```
 
-2. Run the development server:
-   ```bash
-   npm run dev
-   # or
-   pnpm dev
+3. **Set up Supabase**
+   
+   a. Create a project at [supabase.com](https://supabase.com)
+   
+   b. Run the database schema (found in `/docs/schema.sql` or see below)
+   
+   c. Get your API credentials from Settings → API
+
+4. **Configure environment variables**
+   
+   Create a `.env.local` file in the root directory:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
    ```
 
-3. Open [http://localhost:3000](http://localhost:3000) in your browser to see the app.
+5. **Run the development server**
+   ```bash
+   npm run dev
+   ```
 
-### Available Scripts
+6. **Open your browser**
+   
+   Navigate to [http://localhost:3000](http://localhost:3000)
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
+### Database Setup
+
+Run this SQL in your Supabase SQL Editor:
+
+```sql
+-- Enable UUID extension
+create extension if not exists "uuid-ossp";
+
+-- Users table (extends Supabase auth.users)
+create table public.profiles (
+  id uuid references auth.users on delete cascade primary key,
+  email text unique not null,
+  full_name text,
+  avatar_url text,
+  created_at timestamp with time zone default timezone('utc'::text, now()) not null,
+  updated_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+-- Enable Row Level Security
+alter table public.profiles enable row level security;
+
+-- Profiles policies
+create policy "Users can view own profile"
+  on public.profiles for select
+  using (auth.uid() = id);
+
+create policy "Users can update own profile"
+  on public.profiles for update
+  using (auth.uid() = id);
+
+-- Function to create profile on signup
+create or replace function public.handle_new_user()
+returns trigger as $$
+begin
+  insert into public.profiles (id, email, full_name)
+  values (new.id, new.email, new.raw_user_meta_data->>'full_name');
+  return new;
+end;
+$$ language plpgsql security definer;
+
+-- Trigger to create profile automatically
+create trigger on_auth_user_created
+  after insert on auth.users
+  for each row execute procedure public.handle_new_user();
+```
 
 ## 📁 Project Structure
 
 ```
-budgeting app/
-├── app/                      # Next.js App Router directory
-│   ├── layout.tsx           # Root layout (wraps all pages)
-│   ├── page.tsx             # Landing page (/)
-│   ├── globals.css          # Global styles and Tailwind imports
-│   └── dashboard/           # Dashboard section
-│       ├── layout.tsx       # Dashboard-specific layout (sidebar/navbar)
-│       ├── page.tsx         # Main dashboard page
-│       ├── transactions/   # Transactions page (placeholder)
-│       ├── budgets/         # Budgets page (placeholder)
-│       └── settings/        # Settings page (placeholder)
-├── components/              # Reusable React components
-│   ├── Navbar.tsx          # Top navigation bar
-│   ├── Sidebar.tsx         # Left sidebar navigation
-│   └── DashboardShell.tsx  # Dashboard content wrapper
-├── lib/                     # Utility functions (placeholder for now)
-└── public/                  # Static assets (images, etc.)
+budget-tracker/
+├── src/
+│   ├── app/                      # Next.js App Router
+│   │   ├── auth/                # Authentication pages
+│   │   │   ├── login/          # Login page
+│   │   │   ├── signup/         # Signup page
+│   │   │   └── forgot-password/ # Password recovery
+│   │   ├── dashboard/          # Main dashboard
+│   │   ├── transactions/       # Transaction management (planned)
+│   │   ├── budgets/            # Budget management (planned)
+│   │   ├── settings/           # User settings (planned)
+│   │   ├── layout.tsx          # Root layout
+│   │   ├── page.tsx            # Home page (redirects)
+│   │   └── globals.css         # Global styles
+│   ├── components/              # Reusable components
+│   │   └── ui/                 # shadcn/ui components
+│   └── lib/                     # Utilities
+│       ├── supabase/           # Supabase clients
+│       │   ├── client.ts       # Browser client
+│       │   └── server.ts       # Server client
+│       └── utils.ts            # Helper functions
+├── middleware.ts                # Route protection
+├── .env.local                   # Environment variables (create this)
+├── tailwind.config.js          # Tailwind configuration
+├── tsconfig.json               # TypeScript configuration
+└── package.json                # Dependencies
 ```
 
-## 🎨 Design Philosophy
+## 🎨 Design System
 
-BudgetPilot uses a **liquid glass UI** aesthetic inspired by modern Apple design:
-- Frosted glass effects with backdrop blur
-- Subtle gradients and soft shadows
-- Rounded corners and layered depth
-- Smooth animations and transitions
-- Minimal color palette with neutral tones
+### Color Palette
 
-## 📝 How Next.js App Router Works
+**Light Mode:**
+- Background: `#FFFFFF` (Pure White)
+- Secondary: `#FAFAFA` (Off-White)
+- Text: `#0A0A0A` (Near Black)
+- Borders: `#E5E5E5` (Light Gray)
 
-- **`app/layout.tsx`**: The root layout wraps every page in the app
-- **`app/page.tsx`**: The home page at `/`
-- **`app/dashboard/page.tsx`**: The dashboard at `/dashboard`
-- **`app/dashboard/layout.tsx`**: Layout that wraps only dashboard pages (adds sidebar/navbar)
-- File-based routing: folders create routes, `page.tsx` files are the actual pages
+**Dark Mode:**
+- Background: `#0A0A0A` (Near Black)
+- Secondary: `#171717` (Dark Gray)
+- Text: `#FAFAFA` (Off-White)
+- Borders: `#404040` (Dark Gray)
 
-## 🔜 Next Steps
+**Accent Colors:**
+- Success/Income: `#22C55E` (Green)
+- Warning: `#F59E0B` (Amber)
+- Critical/Over Budget: `#EF4444` (Red)
 
-When ready to move to Step 2, we'll add:
-1. Authentication with Auth.js (NextAuth)
-2. PostgreSQL database with Prisma ORM
-3. User accounts and sessions
-4. Bank account integration (Plaid or Teller sandbox)
+### Typography
+- **Font:** Inter (sans-serif)
+- **Monospace:** JetBrains Mono (for numbers)
+- **Spacing:** 8px grid system
 
-## 💡 For Developers
+## 🔒 Security
 
-This project is structured to be beginner-friendly with:
-- Clear comments explaining what each file does
-- Simple, focused components
-- TypeScript for type safety
-- Consistent naming conventions
+- **Authentication:** JWT tokens with 7-day expiration
+- **Database:** Row-level security (RLS) policies
+- **API:** Rate limiting on endpoints
+- **Environment:** Sensitive data in .env.local (not committed)
+- **Encryption:** TLS 1.3 in transit, database encryption at rest
 
-If you're new to Next.js App Router, start by reading the comments in `app/layout.tsx` and `app/page.tsx` to understand how routing and layouts work.
+## 📊 Current Status
 
+### Completed ✅
+- [x] Project setup and configuration
+- [x] Supabase integration
+- [x] User authentication (signup, login, logout)
+- [x] Password recovery flow
+- [x] Protected routes with middleware
+- [x] User profiles and database
+- [x] Dashboard UI
+- [x] Responsive design
+- [x] Dark mode support
 
+### In Progress 🚧
+- [ ] Transaction management system
+- [ ] Category system
+- [ ] Manual transaction entry
 
+### Planned 📋
+- [ ] Bank statement upload
+- [ ] Budget creation and tracking
+- [ ] AI-powered insights
+- [ ] Reports and analytics
+- [ ] Data export
+
+## 🤝 Contributing
+
+This is a personal learning project, but suggestions and feedback are welcome! Feel free to:
+- Open an issue for bugs or feature requests
+- Fork the repo and experiment
+- Share your own implementations
+
+## 📝 Development Log
+
+### Phase 1: Authentication (Complete)
+- Implemented email/password authentication
+- Created signup, login, and password recovery pages
+- Set up Supabase database with RLS policies
+- Built protected dashboard
+- Applied minimalist B&W design system
+
+### Design Decision: Statement Upload vs. Direct Banking
+**Decision:** Use bank statement upload instead of Plaid integration
+
+**Rationale:**
+- Enhanced user privacy (no stored bank credentials)
+- Lower costs (no Plaid subscription fees)
+- Universal compatibility (works with any bank)
+- User control (manual upload when desired)
+- Simpler security model (no OAuth tokens to manage)
+
+## 📜 License
+
+MIT License - feel free to use this project for learning!
+
+## 🙏 Acknowledgments
+
+- Design inspiration: [Monarch Money](https://www.monarchmoney.com/), [Linear](https://linear.app/)
+- UI Components: [shadcn/ui](https://ui.shadcn.com/)
+- Backend: [Supabase](https://supabase.com/)
+- Framework: [Next.js](https://nextjs.org/)
+
+## 📫 Contact
+
+**Developer:** Your Name
+- GitHub: [@YOUR_USERNAME](https://github.com/YOUR_USERNAME)
+- Portfolio: [your-portfolio.com](https://your-portfolio.com)
+
+---
+
+**Built with ❤️ for learning and personal finance management**

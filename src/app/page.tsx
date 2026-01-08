@@ -2,7 +2,7 @@
  * Landing Page (Home Page)
  * 
  * This is the main landing page at the root route "/"
- * It's a marketing-style page that introduces BudgetPilot to visitors.
+ * It's a marketing-style page that introduces BudgetFLow to visitors.
  * 
  * In Next.js App Router:
  * - app/page.tsx is the page shown at "/"

@@ -21,7 +21,7 @@ export default function Navbar() {
       <div className="flex items-center justify-between">
         {/* App name/logo - links to dashboard home */}
         <Link href="/dashboard" className="text-xl font-semibold text-gray-800 hover:text-gray-700 transition-colors">
-          BudgetPilot
+          BudgetFLow
         </Link>
         
         {/* Middle navigation links - simple nav */}
