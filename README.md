@@ -325,7 +325,7 @@ MIT License - feel free to use this project for learning!
 ## 📫 Contact
 
 **Developer:** Your Name
-- GitHub: [@YOUR_USERNAME](https://github.com/YOUR_USERNAME)
+- GitHub: (https://www.linkedin.com/in/christian-cova)
 - Portfolio: [your-portfolio.com](https://your-portfolio.com)
 
 ---

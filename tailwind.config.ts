@@ -51,9 +51,9 @@ const config: Config = {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
-        // Accent colors
-        income: "rgb(34, 197, 94)", // Green
-        expense: "rgb(249, 115, 22)", // Orange
+        // Accent colors (using HSL variables for opacity support)
+        income: "hsl(var(--income))",
+        expense: "hsl(var(--expense))",
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
