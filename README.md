@@ -24,11 +24,12 @@ A modern personal finance management application built with Next.js, TypeScript,
   - Personalized dashboard
 
 - 🎨 **Modern UI/UX**
-  - Minimalist black & white design
-  - Dark mode support
+  - Pure black background with white text design
+  - Glass morphism effects with backdrop blur
   - Fully responsive (mobile, tablet, desktop)
   - Clean, accessible interface
   - Smooth animations and transitions
+  - Green (income) and Orange (expenses) accent colors
 
 ### 🚧 Coming Soon
 
@@ -189,22 +190,31 @@ budget-tracker/
 │   │   │   ├── signup/         # Signup page
 │   │   │   └── forgot-password/ # Password recovery
 │   │   ├── dashboard/          # Main dashboard
-│   │   ├── transactions/       # Transaction management (planned)
-│   │   ├── budgets/            # Budget management (planned)
-│   │   ├── settings/           # User settings (planned)
+│   │   ├── transactions/       # Transaction management (placeholder)
+│   │   ├── budgets/            # Budget management (placeholder)
+│   │   ├── settings/           # User settings (placeholder)
 │   │   ├── layout.tsx          # Root layout
 │   │   ├── page.tsx            # Home page (redirects)
 │   │   └── globals.css         # Global styles
-│   ├── components/              # Reusable components
-│   │   └── ui/                 # shadcn/ui components
 │   └── lib/                     # Utilities
 │       ├── supabase/           # Supabase clients
 │       │   ├── client.ts       # Browser client
 │       │   └── server.ts       # Server client
 │       └── utils.ts            # Helper functions
+├── components/                  # Reusable components
+│   ├── ui/                     # shadcn/ui components
+│   │   ├── button.tsx         # Button component
+│   │   ├── GlassButton.tsx     # Glass button variant
+│   │   ├── GlassCard.tsx       # Glass card component
+│   │   ├── GlassPanel.tsx      # Glass panel component
+│   │   ├── input.tsx           # Input component
+│   │   └── label.tsx           # Label component
+│   ├── Navbar.tsx              # Navigation bar
+│   ├── Sidebar.tsx             # Sidebar navigation
+│   └── DashboardShell.tsx     # Dashboard wrapper
 ├── middleware.ts                # Route protection
 ├── .env.local                   # Environment variables (create this)
-├── tailwind.config.js          # Tailwind configuration
+├── tailwind.config.ts          # Tailwind configuration
 ├── tsconfig.json               # TypeScript configuration
 └── package.json                # Dependencies
 ```
@@ -213,22 +223,27 @@ budget-tracker/
 
 ### Color Palette
 
-**Light Mode:**
-- Background: `#FFFFFF` (Pure White)
-- Secondary: `#FAFAFA` (Off-White)
-- Text: `#0A0A0A` (Near Black)
-- Borders: `#E5E5E5` (Light Gray)
-
-**Dark Mode:**
-- Background: `#0A0A0A` (Near Black)
-- Secondary: `#171717` (Dark Gray)
-- Text: `#FAFAFA` (Off-White)
-- Borders: `#404040` (Dark Gray)
+**Theme: Pure Black & White**
+- Background: `#000000` (Pure Black)
+- Primary Buttons: `#FFFFFF` (White) with black text
+- Text: White with opacity variants (40%, 60%, 90%, 100%)
+- Glass Effects: Black with 30-40% opacity + white gradient overlay (5-8% opacity)
+- Borders: `rgba(255, 255, 255, 0.1)` (10% white)
 
 **Accent Colors:**
-- Success/Income: `#22C55E` (Green)
-- Warning: `#F59E0B` (Amber)
-- Critical/Over Budget: `#EF4444` (Red)
+- Income: `rgb(34, 197, 94)` (Green)
+- Expenses: `rgb(249, 115, 22)` (Orange)
+
+### Glass Morphism Effects
+
+- **Background:** `bg-black/40` (40% black opacity)
+- **Blur:** `backdrop-blur-2xl`
+- **Border:** `border-white/10` (10% white)
+- **Gradient Overlay:** White 5-8% opacity gradient
+- **Buttons:**
+  - Primary: Solid white background, black text
+  - Secondary: Transparent with `white/5` tint
+  - Hover: Subtle scale (1.02) and glow effects
 
 ### Typography
 - **Font:** Inter (sans-serif)
@@ -252,9 +267,10 @@ budget-tracker/
 - [x] Password recovery flow
 - [x] Protected routes with middleware
 - [x] User profiles and database
-- [x] Dashboard UI
+- [x] Dashboard UI with glass morphism design
 - [x] Responsive design
-- [x] Dark mode support
+- [x] Pure black & white design system
+- [x] Placeholder pages (transactions, budgets, settings)
 
 ### In Progress 🚧
 - [ ] Transaction management system
@@ -282,7 +298,8 @@ This is a personal learning project, but suggestions and feedback are welcome! F
 - Created signup, login, and password recovery pages
 - Set up Supabase database with RLS policies
 - Built protected dashboard
-- Applied minimalist B&W design system
+- Applied pure black & white design system with glass morphism effects
+- Created placeholder pages for transactions, budgets, and settings
 
 ### Design Decision: Statement Upload vs. Direct Banking
 **Decision:** Use bank statement upload instead of Plaid integration

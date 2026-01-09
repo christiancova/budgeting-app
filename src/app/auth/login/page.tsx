@@ -29,7 +29,6 @@ export default function LoginPage() {
 
       if (error) throw error
 
-      // Redirect to dashboard on success
       router.push('/dashboard')
       router.refresh()
     } catch (err: any) {
@@ -40,27 +39,30 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white dark:bg-[#0A0A0A] px-4">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-mesh relative overflow-hidden">
+      {/* Animated Background Orbs */}
+      <div className="absolute top-20 left-20 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-float" />
+      <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-pink-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }} />
+
+      {/* Login Card */}
+      <div className="w-full max-w-md relative z-10">
         {/* Logo/Brand */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-semibold text-[#0A0A0A] dark:text-[#FAFAFA] mb-2">
+        <div className="text-center mb-8 floating">
+          <h1 className="text-4xl font-bold mb-2 gradient-text">
             BudgetFlow
           </h1>
-          <p className="text-sm text-[#737373]">
+          <p className="text-white/60">
             Sign in to manage your finances
           </p>
         </div>
 
-        {/* Login Form */}
-        <div className="bg-white dark:bg-[#171717] border border-[#E5E5E5] dark:border-[#404040] rounded-xl p-8">
-          <form onSubmit={handleLogin} className="space-y-6">
+        {/* Glass Card */}
+        <div className="glass-card-premium p-8 space-y-6">
+          <form onSubmit={handleLogin} className="space-y-5">
             {/* Email Field */}
             <div className="space-y-2">
-              <Label 
-                htmlFor="email" 
-                className="text-sm font-medium text-[#0A0A0A] dark:text-[#FAFAFA]"
-              >
+              <Label htmlFor="email" className="text-sm font-medium">
                 Email
               </Label>
               <Input
@@ -70,22 +72,19 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="h-10 bg-[#FAFAFA] dark:bg-[#0A0A0A] border-[#E5E5E5] dark:border-[#404040] text-[#0A0A0A] dark:text-[#FAFAFA] placeholder:text-[#A3A3A3] focus:ring-2 focus:ring-[#0A0A0A] dark:focus:ring-[#FAFAFA]"
+                className="glass-input h-12"
               />
             </div>
 
             {/* Password Field */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Label 
-                  htmlFor="password"
-                  className="text-sm font-medium text-[#0A0A0A] dark:text-[#FAFAFA]"
-                >
+                <Label htmlFor="password" className="text-sm font-medium">
                   Password
                 </Label>
                 <Link 
                   href="/auth/forgot-password"
-                  className="text-xs text-[#737373] hover:text-[#0A0A0A] dark:hover:text-[#FAFAFA] transition-colors"
+                  className="text-xs text-white/90 hover:text-white transition-colors"
                 >
                   Forgot password?
                 </Link>
@@ -97,14 +96,14 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="h-10 bg-[#FAFAFA] dark:bg-[#0A0A0A] border-[#E5E5E5] dark:border-[#404040] text-[#0A0A0A] dark:text-[#FAFAFA] placeholder:text-[#A3A3A3] focus:ring-2 focus:ring-[#0A0A0A] dark:focus:ring-[#FAFAFA]"
+                className="glass-input h-12"
               />
             </div>
 
             {/* Error Message */}
             {error && (
-              <div className="p-3 rounded-lg bg-[#FEF2F2] dark:bg-[#7F1D1D] border border-[#FEE2E2] dark:border-[#991B1B]">
-                <p className="text-sm text-[#DC2626] dark:text-[#FCA5A5]">
+              <div className="glass-card p-4 border-destructive/50 bg-destructive/10">
+                <p className="text-sm text-destructive">
                   {error}
                 </p>
               </div>
@@ -114,19 +113,26 @@ export default function LoginPage() {
             <Button
               type="submit"
               disabled={loading}
-              className="w-full h-10 bg-[#0A0A0A] dark:bg-[#FAFAFA] text-white dark:text-[#0A0A0A] hover:bg-[#262626] dark:hover:bg-[#E5E5E5] font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="glass-button-primary w-full h-12 text-base font-semibold"
             >
-              {loading ? 'Signing in...' : 'Sign in'}
+              {loading ? (
+                <span className="flex items-center gap-2">
+                  <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  Signing in...
+                </span>
+              ) : (
+                'Sign in'
+              )}
             </Button>
           </form>
 
           {/* Divider */}
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-[#E5E5E5] dark:border-[#404040]" />
+              <div className="w-full border-t border-white/10" />
             </div>
             <div className="relative flex justify-center text-xs">
-              <span className="px-2 bg-white dark:bg-[#171717] text-[#737373]">
+              <span className="px-3 bg-black/40 text-white/60">
                 Don't have an account?
               </span>
             </div>
@@ -136,8 +142,7 @@ export default function LoginPage() {
           <Link href="/auth/signup">
             <Button
               type="button"
-              variant="outline"
-              className="w-full h-10 border-[#E5E5E5] dark:border-[#404040] text-[#0A0A0A] dark:text-[#FAFAFA] hover:bg-[#FAFAFA] dark:hover:bg-[#262626] font-medium transition-all"
+              className="glass-button w-full h-12 text-base font-semibold"
             >
               Create account
             </Button>
@@ -145,13 +150,13 @@ export default function LoginPage() {
         </div>
 
         {/* Footer */}
-        <p className="text-center text-xs text-[#A3A3A3] mt-8">
+        <p className="text-center text-xs text-white/60 mt-8">
           By signing in, you agree to our{' '}
-          <Link href="/terms" className="underline hover:text-[#737373]">
+          <Link href="/terms" className="text-white/90 hover:text-white transition-colors">
             Terms of Service
           </Link>{' '}
           and{' '}
-          <Link href="/privacy" className="underline hover:text-[#737373]">
+          <Link href="/privacy" className="text-white/90 hover:text-white transition-colors">
             Privacy Policy
           </Link>
         </p>

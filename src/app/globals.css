@@ -12,158 +12,291 @@
  * Base layer: Set up the root element and custom properties
  * These variables can be used throughout the app for consistent theming
  */
-@layer base {
+ @layer base {
   :root {
-    /* Neutral color palette for liquid glass aesthetic */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
+    /* Pure Black Background with White Text Theme */
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 0%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 0%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 100%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 100%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 0 0% 100%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 100%;
+    --input: 0 0% 100%;
+    --ring: 0 0% 100%;
+    --radius: 1rem;
+    --chart-1: 142 76% 36%; /* Green for income */
+    --chart-2: 38 92% 50%; /* Orange for expenses */
+    --chart-3: 262 83% 58%;
+    --chart-4: 38 92% 50%;
+    --chart-5: 0 84% 60%;
+    /* Text opacity variants */
+    --text-40: 0 0% 100% / 0.4;
+    --text-60: 0 0% 100% / 0.6;
+    --text-90: 0 0% 100% / 0.9;
+    --text-100: 0 0% 100% / 1;
   }
 
-  /* 
-   * Smooth scrolling and better font rendering
-   * This makes the UI feel more polished
-   */
-  html {
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  body {
-    @apply bg-app-gradient text-gray-900;
-    /* Apple-style soft gradient background */
-  }
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    /* Same as root - pure black theme */
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 0%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 0%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 100%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 100%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 0 0% 100%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 100%;
+    --input: 0 0% 100%;
+    --ring: 0 0% 100%;
+    /* Text opacity variants */
+    --text-40: 0 0% 100% / 0.4;
+    --text-60: 0 0% 100% / 0.6;
+    --text-90: 0 0% 100% / 0.9;
+    --text-100: 0 0% 100% / 1;
   }
 }
 
-/* 
- * Component layer: Reusable utility classes for liquid glass effects
- * These can be applied to any element using className
- */
-@layer components {
-  /* 
-   * Glass panel: Large containers with radial gradient + backdrop blur
-   * Use for main content areas and large dashboard sections
-   */
-  .glass-panel {
-    @apply backdrop-blur-2xl bg-white/10 border border-white/20 rounded-3xl shadow-soft-lg;
-    /* 
-     * backdrop-blur-2xl: Strong frosted glass blur effect
-     * bg-white/10: Subtle transparent white background (10% opacity)
-     * border-white/20: Subtle white border for definition
-     * rounded-3xl: Large rounded corners for modern look
-     * shadow-soft-lg: Soft shadow for floating effect
-     */
-  }
-
-  /* 
-   * Glass card: Smaller glassy containers for stats/widgets
-   * Use for cards, widgets, and smaller content blocks
-   */
-  .glass-card {
-    @apply backdrop-blur-xl bg-white/15 border border-white/20 rounded-2xl shadow-soft;
-    /* 
-     * backdrop-blur-xl: Frosted glass blur effect
-     * bg-white/15: Slightly lighter blur than panel
-     * border-white/20: Subtle white border
-     * rounded-2xl: Medium rounded corners
-     * shadow-soft: Soft shadow for depth
-     */
-  }
-
-  /* 
-   * Glass nav: Navbar-specific blur styling
-   * Use for navigation bars and top-level navigation
-   */
-  .glass-nav {
-    @apply backdrop-blur-xl bg-white/10 border border-white/20;
-    /* 
-     * backdrop-blur-xl: Frosted glass blur effect
-     * bg-white/10: Transparent white background
-     * border-white/20: Subtle white border
-     */
-  }
-
-  /* 
-   * Glass container: Legacy class for backward compatibility
-   * Creates a frosted glass effect with blur and transparency
-   */
-  .glass-container {
-    @apply backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl shadow-lg;
-    /* 
-     * backdrop-blur-xl: Creates the frosted glass blur effect
-     * bg-white/30: Semi-transparent white background (30% opacity)
-     * border-white/20: Subtle white border for definition
-     * rounded-2xl: Large rounded corners for modern look
-     * shadow-lg: Soft shadow for depth
-     */
-  }
-}
-
-/* 
- * Utility layer: Custom utilities if needed
- * Add any project-specific utility classes here
- */
-@layer utilities {
-  /* Add custom utilities here if needed in the future */
-}
-/* 
- ---break---
- */
 @layer base {
   * {
     @apply border-border;
   }
+  
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/30;
   }
 }
 
+@layer components {
+  /* Liquid Glass Card */
+  .glass-card {
+    @apply relative overflow-hidden rounded-2xl;
+    @apply bg-black/40;
+    @apply backdrop-blur-2xl;
+    @apply border border-white/10;
+    @apply shadow-glass;
+    background-image: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+  }
+
+  /* Premium Glass Card */
+  .glass-card-premium {
+    @apply glass-card;
+    @apply shadow-glass-lg;
+    background-image: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.06) 100%
+    );
+  }
+
+  /* Glass Panel */
+  .glass-panel {
+    @apply relative overflow-hidden rounded-3xl;
+    @apply bg-black/40;
+    @apply backdrop-blur-2xl;
+    @apply border border-white/10;
+    @apply shadow-glass;
+    background-image: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+  }
+
+  /* Glass Input */
+  .glass-input {
+    @apply w-full px-4 py-3 rounded-xl;
+    @apply bg-black/40;
+    @apply backdrop-blur-xl;
+    @apply border border-white/10;
+    @apply text-white placeholder:text-white/40;
+    @apply focus:outline-none focus:ring-2 focus:ring-white/20;
+    @apply transition-all duration-200;
+  }
+
+  /* Glass Button - Secondary (Transparent with white/5 tint) */
+  .glass-button {
+    @apply px-6 py-3 rounded-xl font-medium;
+    @apply bg-white/5;
+    @apply backdrop-blur-xl;
+    @apply border border-white/10;
+    @apply text-white;
+    @apply hover:bg-white/10 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(255,255,255,0.1)];
+    @apply active:scale-95;
+    @apply transition-all duration-200;
+  }
+
+  /* Primary Glass Button - Solid white background, black text */
+  .glass-button-primary {
+    @apply px-6 py-3 rounded-xl font-medium;
+    @apply bg-white text-black;
+    @apply border border-white/20;
+    @apply hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)];
+    @apply active:scale-95;
+    @apply transition-all duration-200;
+  }
+
+  /* Frosted Glass Background */
+  .frosted-glass {
+    @apply relative;
+    @apply bg-black/40;
+    @apply backdrop-blur-3xl;
+    @apply border border-white/10;
+  }
+
+  /* Floating Element */
+  .floating {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-white via-white/90 to-white/80;
+    @apply text-white;
+  }
+
+  /* Shimmer Effect */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  /* Glass Navbar */
+  .glass-navbar {
+    @apply sticky top-0 z-50;
+    @apply bg-black/40;
+    @apply backdrop-blur-2xl;
+    @apply border-b border-white/10;
+    @apply shadow-glass;
+  }
+
+  /* Glow Effect */
+  .glow {
+    @apply relative;
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  .glow::before {
+    content: '';
+    @apply absolute inset-0 rounded-inherit;
+    @apply bg-primary/20;
+    @apply blur-xl;
+    @apply -z-10;
+  }
+}
+
+@layer utilities {
+  /* Text Balance */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Backdrop Filters */
+  .backdrop-blur-xs {
+    backdrop-filter: blur(2px);
+  }
+
+  .backdrop-blur-3xl {
+    backdrop-filter: blur(64px);
+  }
+
+  /* Gradient Backgrounds */
+  .bg-mesh {
+    background-color: #000000;
+    background-image: 
+      radial-gradient(at 40% 20%, rgba(34, 197, 94, 0.1) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, rgba(249, 115, 22, 0.1) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, rgba(34, 197, 94, 0.08) 0px, transparent 50%),
+      radial-gradient(at 80% 50%, rgba(249, 115, 22, 0.08) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, rgba(34, 197, 94, 0.1) 0px, transparent 50%),
+      radial-gradient(at 80% 100%, rgba(249, 115, 22, 0.1) 0px, transparent 50%);
+  }
+
+  /* Apple-style blur */
+  .apple-blur {
+    backdrop-filter: saturate(180%) blur(20px);
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  /* Text opacity utilities */
+  .text-40 {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .text-60 {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .text-90 {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .text-100 {
+    color: rgba(255, 255, 255, 1);
+  }
+
+  /* Accent colors */
+  .text-income {
+    color: rgb(34, 197, 94); /* Green */
+  }
+
+  .text-expense {
+    color: rgb(249, 115, 22); /* Orange */
+  }
+}

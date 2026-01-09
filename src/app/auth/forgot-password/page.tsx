@@ -37,32 +37,32 @@ export default function ForgotPasswordPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white dark:bg-[#0A0A0A] px-4">
+      <div className="min-h-screen flex items-center justify-center bg-black px-4">
         <div className="w-full max-w-md">
           {/* Success State */}
-          <div className="bg-white dark:bg-[#171717] border border-[#E5E5E5] dark:border-[#404040] rounded-xl p-8 text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#DCFCE7] dark:bg-[#166534] mb-6">
-              <CheckCircle2 className="w-8 h-8 text-[#22C55E]" />
+          <div className="glass-card-premium p-8 text-center">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-income/20 mb-6">
+              <CheckCircle2 className="w-8 h-8 text-income" />
             </div>
             
-            <h2 className="text-2xl font-semibold text-[#0A0A0A] dark:text-[#FAFAFA] mb-3">
+            <h2 className="text-2xl font-semibold text-white mb-3">
               Check your email
             </h2>
             
-            <p className="text-[#737373] mb-8">
-              We've sent a password reset link to <strong className="text-[#0A0A0A] dark:text-[#FAFAFA]">{email}</strong>
+            <p className="text-white/60 mb-8">
+              We've sent a password reset link to <strong className="text-white">{email}</strong>
             </p>
 
             <div className="space-y-3">
               <Link href="/auth/login" className="block">
-                <Button className="w-full h-10 bg-[#0A0A0A] dark:bg-[#FAFAFA] text-white dark:text-[#0A0A0A] hover:bg-[#262626] dark:hover:bg-[#E5E5E5] font-medium">
+                <Button className="glass-button-primary w-full h-12 font-medium">
                   Back to login
                 </Button>
               </Link>
               
               <button
                 onClick={() => setSuccess(false)}
-                className="text-sm text-[#737373] hover:text-[#0A0A0A] dark:hover:text-[#FAFAFA] transition-colors"
+                className="text-sm text-white/60 hover:text-white transition-colors"
               >
                 Didn't receive the email? Try again
               </button>
@@ -74,12 +74,12 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white dark:bg-[#0A0A0A] px-4">
+    <div className="min-h-screen flex items-center justify-center bg-black px-4">
       <div className="w-full max-w-md">
         {/* Back Button */}
         <Link 
           href="/auth/login"
-          className="inline-flex items-center text-sm text-[#737373] hover:text-[#0A0A0A] dark:hover:text-[#FAFAFA] transition-colors mb-8"
+          className="inline-flex items-center text-sm text-white/60 hover:text-white transition-colors mb-8"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to login
@@ -87,22 +87,22 @@ export default function ForgotPasswordPage() {
 
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-semibold text-[#0A0A0A] dark:text-[#FAFAFA] mb-2">
+          <h1 className="text-3xl font-semibold text-white mb-2">
             Reset your password
           </h1>
-          <p className="text-sm text-[#737373]">
+          <p className="text-sm text-white/60">
             Enter your email and we'll send you a link to reset your password
           </p>
         </div>
 
         {/* Reset Form */}
-        <div className="bg-white dark:bg-[#171717] border border-[#E5E5E5] dark:border-[#404040] rounded-xl p-8">
+        <div className="glass-card-premium p-8">
           <form onSubmit={handleResetPassword} className="space-y-6">
             {/* Email Field */}
             <div className="space-y-2">
               <Label 
                 htmlFor="email" 
-                className="text-sm font-medium text-[#0A0A0A] dark:text-[#FAFAFA]"
+                className="text-sm font-medium text-white"
               >
                 Email address
               </Label>
@@ -113,14 +113,14 @@ export default function ForgotPasswordPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="h-10 bg-[#FAFAFA] dark:bg-[#0A0A0A] border-[#E5E5E5] dark:border-[#404040] text-[#0A0A0A] dark:text-[#FAFAFA] placeholder:text-[#A3A3A3] focus:ring-2 focus:ring-[#0A0A0A] dark:focus:ring-[#FAFAFA]"
+                className="glass-input h-12"
               />
             </div>
 
             {/* Error Message */}
             {error && (
-              <div className="p-3 rounded-lg bg-[#FEF2F2] dark:bg-[#7F1D1D] border border-[#FEE2E2] dark:border-[#991B1B]">
-                <p className="text-sm text-[#DC2626] dark:text-[#FCA5A5]">
+              <div className="glass-card p-4 border-destructive/50 bg-destructive/10">
+                <p className="text-sm text-destructive">
                   {error}
                 </p>
               </div>
@@ -130,7 +130,7 @@ export default function ForgotPasswordPage() {
             <Button
               type="submit"
               disabled={loading}
-              className="w-full h-10 bg-[#0A0A0A] dark:bg-[#FAFAFA] text-white dark:text-[#0A0A0A] hover:bg-[#262626] dark:hover:bg-[#E5E5E5] font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="glass-button-primary w-full h-12 font-medium"
             >
               {loading ? 'Sending...' : 'Send reset link'}
             </Button>
@@ -138,9 +138,9 @@ export default function ForgotPasswordPage() {
         </div>
 
         {/* Help Text */}
-        <p className="text-center text-xs text-[#A3A3A3] mt-6">
+        <p className="text-center text-xs text-white/60 mt-6">
           Remember your password?{' '}
-          <Link href="/auth/login" className="text-[#737373] underline hover:text-[#0A0A0A] dark:hover:text-[#FAFAFA]">
+          <Link href="/auth/login" className="text-white/90 underline hover:text-white transition-colors">
             Sign in
           </Link>
         </p>
