@@ -58,7 +58,7 @@ export default async function DashboardPage() {
             Welcome back{profile?.full_name ? `, ${profile.full_name}` : ''}! 👋
           </h2>
           <p className="text-white/60 text-lg">
-            Here's your financial overview
+            Here&apos;s your financial overview
           </p>
         </div>
 
