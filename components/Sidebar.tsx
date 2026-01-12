@@ -34,7 +34,7 @@ export default function Sidebar() {
   const pathname = usePathname(); // Get current route to highlight active link
 
   return (
-    <aside className="w-64 backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl p-6 shadow-soft-lg">
+    <aside className="w-64 glass-panel p-6">
       {/* Navigation links */}
       <nav className="space-y-2">
         {navItems.map((item) => {
@@ -47,8 +47,8 @@ export default function Sidebar() {
               className={`
                 block px-4 py-3 rounded-2xl transition-all duration-200
                 ${isActive 
-                  ? "bg-white/30 text-gray-900 font-semibold shadow-soft backdrop-blur-sm" 
-                  : "text-gray-700 hover:bg-white/15 hover:text-gray-900"
+                  ? "bg-white/10 text-white font-semibold backdrop-blur-sm" 
+                  : "text-white/90 hover:bg-white/5 hover:text-white"
                 }
               `}
             >
@@ -59,8 +59,8 @@ export default function Sidebar() {
       </nav>
 
       {/* Bottom section - placeholder for future user info */}
-      <div className="mt-8 pt-8 border-t border-white/20">
-        <p className="text-xs text-gray-500 text-center">
+      <div className="mt-8 pt-8 border-t border-white/10">
+        <p className="text-xs text-white/40 text-center">
           BudgetFLow v1.0
         </p>
       </div>

@@ -31,17 +31,7 @@ export default function GlassButton({ children, className = "", ...props }: Glas
         glass-button
         rounded-full
         px-6 py-3
-        bg-white/20
-        backdrop-blur-xl
-        border border-white/30
-        text-gray-800
         font-medium
-        shadow-soft
-        transition-all duration-200
-        hover:scale-105
-        hover:bg-white/30
-        hover:shadow-soft-lg
-        active:scale-95
         disabled:opacity-50
         disabled:cursor-not-allowed
         ${className}
